@@ -1,5 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
+// Navbar.js
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
@@ -17,6 +18,9 @@ const Navbar = () => {
           </Link>
           <Link className="text-white hover:bg-gray-700 px-3 py-2 rounded" to="/signin">
             Sign In
+          </Link>
+          <Link className="text-white hover:bg-gray-700 px-3 py-2 rounded" to="/contact">
+            Contact Us
           </Link>
         </div>
       </div>

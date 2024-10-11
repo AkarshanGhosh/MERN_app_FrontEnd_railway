@@ -10,7 +10,7 @@ const Home = () => {
           <p className="text-center text-gray-700">Login to access</p>
         </div>
       </div>
-      <footer className="bg-gray-200 p-4 text-center text-gray-700">
+      <footer className="bg-gray-800 p-4 text-center text-gray-300 rounded-t-2xl">
         <p>&copy; 2024 Akarshan Ghosh</p>
         <p>Phone: +123 456 7890</p>
         <p>Email: akarshan.ghosh@example.com</p>
