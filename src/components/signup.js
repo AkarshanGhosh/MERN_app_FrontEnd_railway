@@ -1,22 +1,55 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignUp = () => {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [phone, setPhone] = useState('');
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState(null); // To store error messages
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({ username, email, password, phone });
+    setError(null); // Reset error state on new submit
+
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/createuser", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          Username: username,
+          Email: email,
+          password,
+          Phone_Number: phone,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // If user creation is successful, save the auth token and navigate to login or dashboard
+        localStorage.setItem("token", data.authToken);
+        navigate("/signin"); // Redirect to sign-in page
+      } else {
+        setError(data.error || "Failed to create account");
+      }
+    } catch (err) {
+      setError("An error occurred. Please try again.");
+      console.error("Error:", err);
+    }
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md bg-blue-100 p-8 rounded-2xl shadow-lg">
-        <h2 className="text-3xl font-bold text-center text-gray-900 mb-6">Create account</h2>
+        <h2 className="text-3xl font-bold text-center text-gray-900 mb-6">
+          Create account
+        </h2>
+        {error && <p className="text-red-500 text-center">{error}</p>}
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
@@ -43,12 +76,12 @@ const SignUp = () => {
               required
               className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
             />
-            <button 
+            <button
               type="button"
               className="absolute right-3 top-3 text-gray-600 focus:outline-none"
               onClick={() => setShowPassword(!showPassword)}
             >
-              {showPassword ? 'Hide' : 'Show'}
+              {showPassword ? "Hide" : "Show"}
             </button>
           </div>
           <input
@@ -67,7 +100,13 @@ const SignUp = () => {
           </button>
         </form>
         <p className="mt-4 text-center text-gray-600">
-          Already have an account? <Link to="/signin" className="text-black font-semibold hover:underline">Log in</Link>
+          Already have an account?{" "}
+          <Link
+            to="/signin"
+            className="text-black font-semibold hover:underline"
+          >
+            Log in
+          </Link>
         </p>
       </div>
     </div>
