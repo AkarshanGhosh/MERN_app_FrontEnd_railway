@@ -7,7 +7,7 @@ const tableState = (props) => {
 
     }
     return(
-        <tableContext.provider value={state}>
+        <tableContext.provider value={{}}>
             {props.children}
 
         </tableContext.provider>
