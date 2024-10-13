@@ -12,13 +12,15 @@ function App() {
     <tableState>
       <Router>
         <Navbar />
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route exact path="/signup" element={<SignUp />} />
-          <Route exact path="/signin" element={<SignIn />} />
-          <Route exact path="/contact" element={<Contact />} />{" "}
-          {/* Add Contact route */}
-        </Routes>
+        <div className="container">
+          <Routes>
+            <Route exact path="/" element={<Home />} />
+            <Route exact path="/signup" element={<SignUp />} />
+            <Route exact path="/signin" element={<SignIn />} />
+            <Route exact path="/contact" element={<Contact />} />{" "}
+            {/* Add Contact route */}
+          </Routes>
+        </div>
       </Router>
     </tableState>
   );
