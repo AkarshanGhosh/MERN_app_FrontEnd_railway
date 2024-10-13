@@ -1,6 +1,8 @@
 // App.js
 import "./App.css";
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { connectWebSocket } from './utils/websocket'; // Import the WebSocket function
 import Navbar from "./components/navbar";
 import Home from "./components/home";
 import SignUp from "./components/signup";
@@ -8,8 +10,12 @@ import SignIn from "./components/signin";
 import Contact from "./components/Contact"; // Import the Contact component
 
 function App() {
+  useEffect(() => {
+    connectWebSocket(); // Establish WebSocket connection when component mounts
+  }, []);
+
   return (
-    <tableState>
+    <>
       <Router>
         <Navbar />
         <div className="container">
@@ -22,7 +28,7 @@ function App() {
           </Routes>
         </div>
       </Router>
-    </tableState>
+    </>
   );
 }
 
