@@ -1,11 +1,9 @@
 // src/components/Dashboard.js
 import React from "react";
-import DashboardNavbar from "./DashboardNavbar"; // Ensure this line is correct
 
 const Dashboard = () => {
   return (
     <div className="flex flex-col min-h-screen"> {/* Ensures the container fills the screen */}
-      <DashboardNavbar />
       <div className="flex-grow p-4"> {/* Allow this section to grow and push the footer down */}
         <h2>Welcome to the Dashboard!</h2>
         {/* Notice box */}

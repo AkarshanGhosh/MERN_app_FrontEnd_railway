@@ -22,11 +22,9 @@ function App() {
 
   return (
     <>
-      {location.pathname === '/dashboard' || location.pathname === '/profile' ? (
-        <DashboardNavbar /> // Render DashboardNavbar for Dashboard and Profile routes
-      ) : (
-        <Navbar /> // Render original Navbar for other routes
-      )}
+      {/* Hide both Navbar and DashboardNavbar on Profile page */}
+      {location.pathname !== '/profile' && location.pathname !== '/dashboard' && <Navbar />}
+      {location.pathname === '/dashboard' && <DashboardNavbar />} {/* Render DashboardNavbar only on Dashboard */}
       
       <div className="container">
         <Routes>
