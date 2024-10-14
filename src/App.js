@@ -3,12 +3,14 @@ import "./App.css";
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { connectWebSocket } from './utils/websocket'; // Import the WebSocket function
-import Navbar from "./components/navbar";
+import Navbar from "./components/navbar"; // Original Navbar
+import DashboardNavbar from "./components/DashboardNavbar"; // Import DashboardNavbar
 import Home from "./components/home";
 import SignUp from "./components/signup";
 import SignIn from "./components/signin";
 import Contact from "./components/Contact"; // Import the Contact component
 import Dashboard from "./components/Dashboard"; // Import the Dashboard component
+import Profile from "./components/Profile"; // Import the Profile component
 
 function App() {
   useEffect(() => {
@@ -20,7 +22,12 @@ function App() {
 
   return (
     <>
-      {location.pathname !== '/dashboard' && <Navbar />} {/* Render Navbar unless on Dashboard */}
+      {location.pathname === '/dashboard' || location.pathname === '/profile' ? (
+        <DashboardNavbar /> // Render DashboardNavbar for Dashboard and Profile routes
+      ) : (
+        <Navbar /> // Render original Navbar for other routes
+      )}
+      
       <div className="container">
         <Routes>
           <Route exact path="/" element={<Home />} />
@@ -28,6 +35,7 @@ function App() {
           <Route exact path="/signin" element={<SignIn />} />
           <Route exact path="/contact" element={<Contact />} />
           <Route exact path="/dashboard" element={isAuthenticated ? <Dashboard /> : <SignIn />} />
+          <Route exact path="/profile" element={isAuthenticated ? <Profile /> : <SignIn />} /> {/* Profile Route */}
         </Routes>
       </div>
     </>
