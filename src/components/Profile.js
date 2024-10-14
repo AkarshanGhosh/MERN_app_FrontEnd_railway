@@ -1,4 +1,4 @@
-// src/components/Profile.js
+// Profile.js
 import React, { useEffect, useState } from 'react'; // Import React and hooks
 import axios from 'axios'; // Import Axios for making API requests
 import DashboardNavbar from './DashboardNavbar'; // Import the Dashboard Navbar component
@@ -48,11 +48,11 @@ const Profile = () => {
       {error && <p className="text-red-500 text-center">{error}</p>} {/* Show error message if it exists */}
 
       {userData ? ( // Check if userData is available
-        <div className="bg-white p-4 rounded-lg shadow-md"> {/* Container for user details */}
-          <p className="text-xl font-semibold text-gray-700">Username: <span className="font-normal">{userData.Username}</span></p> {/* Display username */}
-          <p className="text-xl font-semibold text-gray-700">Email: <span className="font-normal">{userData.Email}</span></p> {/* Display email */}
-          <p className="text-xl font-semibold text-gray-700">Phone Number: <span className="font-normal">{userData.Phone_Number}</span></p> {/* Display phone number */}
-          <p className="text-xl font-semibold text-gray-700">ID: <span className="font-normal">{userData._id}</span></p> {/* Display user ID */}
+        <div className="bg-white p-4 rounded-lg shadow-md space-y-4"> {/* Container for user details */}
+          <p className="text-lg md:text-xl font-semibold text-gray-700">Username: <span className="font-normal">{userData.Username}</span></p> {/* Display username */}
+          <p className="text-lg md:text-xl font-semibold text-gray-700">Email: <span className="font-normal">{userData.Email}</span></p> {/* Display email */}
+          <p className="text-lg md:text-xl font-semibold text-gray-700">Phone Number: <span className="font-normal">{userData.Phone_Number}</span></p> {/* Display phone number */}
+          <p className="text-lg md:text-xl font-semibold text-gray-700">ID: <span className="font-normal">{userData._id}</span></p> {/* Display user ID */}
           {/* Add additional profile details here */}
         </div>
       ) : (
