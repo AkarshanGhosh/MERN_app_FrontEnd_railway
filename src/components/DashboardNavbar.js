@@ -6,7 +6,11 @@ const DashboardNavbar = () => {
   return (
     <nav className="bg-white shadow">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        <h1 className="text-xl font-bold mr-8">Welcome to Dashboard</h1> {/* Add margin-right to space from search */}
+        <Link to="/dashboard"> {/* Wrap the text in a Link */}
+          <h1 className="text-xl font-bold mr-8 cursor-pointer hover:text-blue-600"> {/* Add hover effect */}
+            Welcome to Dashboard
+          </h1>
+        </Link>
 
         <div className="flex items-center space-x-6"> {/* Increase spacing between items */}
           <input
