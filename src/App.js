@@ -1,4 +1,3 @@
-// App.js
 import "./App.css"; // Importing global CSS styles
 import React, { useEffect } from 'react'; // Import React and useEffect hook
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom"; // Import routing components from React Router
@@ -11,6 +10,7 @@ import SignIn from "./components/signin"; // Import the SignIn component
 import Contact from "./components/Contact"; // Import the Contact component
 import Dashboard from "./components/Dashboard"; // Import the Dashboard component
 import Profile from "./components/Profile"; // Import the Profile component
+import Train from "./components/Train"; // Import the Train component
 
 // Define the main App component
 function App() {
@@ -25,8 +25,8 @@ function App() {
   return (
     <>
       {/* Conditionally render Navbar and DashboardNavbar based on current location */}
-      {location.pathname !== '/profile' && location.pathname !== '/dashboard' && <Navbar />} {/* Show original Navbar if not on Profile or Dashboard */}
-      {location.pathname === '/dashboard' && <DashboardNavbar />} {/* Render DashboardNavbar only on the Dashboard page */}
+      {location.pathname !== '/profile' && location.pathname !== '/dashboard' && location.pathname !== '/train' && <Navbar />} {/* Show original Navbar if not on Profile, Dashboard, or Train */}
+      {(location.pathname === '/dashboard' || location.pathname === '/train') && <DashboardNavbar />} {/* Render DashboardNavbar only on the Dashboard and Train pages */}
       
       <div className="container"> {/* Main container for the application */}
         <Routes> {/* Define application routes */}
@@ -36,6 +36,7 @@ function App() {
           <Route exact path="/contact" element={<Contact />} /> {/* Contact route */}
           <Route exact path="/dashboard" element={isAuthenticated ? <Dashboard /> : <SignIn />} /> {/* Dashboard route, redirect to SignIn if not authenticated */}
           <Route exact path="/profile" element={isAuthenticated ? <Profile /> : <SignIn />} /> {/* Profile route, redirect to SignIn if not authenticated */}
+          <Route exact path="/train" element={isAuthenticated ? <Train /> : <SignIn />} /> {/* Train route, redirect to SignIn if not authenticated */}
         </Routes>
       </div>
     </>
