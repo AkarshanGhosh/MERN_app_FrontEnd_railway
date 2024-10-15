@@ -57,7 +57,7 @@ const Dashboard = () => {
       setNoDataMessage("The service hasn't started in the respective location."); // Set no data message
     }
   };
-//___________________________________________________________ Display codes
+
   return (
     <div className="flex flex-col min-h-screen">
       <div className="flex-grow p-4">
