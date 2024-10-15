@@ -25,8 +25,8 @@ function App() {
   return (
     <>
       {/* Conditionally render Navbar and DashboardNavbar based on current location */}
-      {location.pathname !== '/profile' && location.pathname !== '/dashboard' && location.pathname !== '/train' && <Navbar />} {/* Show original Navbar if not on Profile, Dashboard, or Train */}
-      {(location.pathname === '/dashboard' || location.pathname === '/train') && <DashboardNavbar />} {/* Render DashboardNavbar only on the Dashboard and Train pages */}
+      {location.pathname !== '/profile' && location.pathname !== '/dashboard' && location.pathname !== '/train' && <Navbar />}
+      {(location.pathname === '/dashboard' || location.pathname.startsWith('/train')) && <DashboardNavbar />}
       
       <div className="container"> {/* Main container for the application */}
         <Routes> {/* Define application routes */}
@@ -36,7 +36,7 @@ function App() {
           <Route exact path="/contact" element={<Contact />} /> {/* Contact route */}
           <Route exact path="/dashboard" element={isAuthenticated ? <Dashboard /> : <SignIn />} /> {/* Dashboard route, redirect to SignIn if not authenticated */}
           <Route exact path="/profile" element={isAuthenticated ? <Profile /> : <SignIn />} /> {/* Profile route, redirect to SignIn if not authenticated */}
-          <Route exact path="/train" element={isAuthenticated ? <Train /> : <SignIn />} /> {/* Train route, redirect to SignIn if not authenticated */}
+          <Route exact path="/train/:trainNumber" element={isAuthenticated ? <Train /> : <SignIn />} /> {/* Train route, redirect to SignIn if not authenticated */}
         </Routes>
       </div>
     </>

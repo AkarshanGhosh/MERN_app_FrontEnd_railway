@@ -2,67 +2,65 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Dashboard = () => {
-  const [selectedDivision, setSelectedDivision] = useState(""); // State to track the selected division
-  const [selectedCity, setSelectedCity] = useState(""); // State to track the selected city
-  const [trains, setTrains] = useState([]); // State to store train data
-  const [noDataMessage, setNoDataMessage] = useState(""); // State to track no data message
+  const [selectedDivision, setSelectedDivision] = useState("");
+  const [selectedCity, setSelectedCity] = useState("");
+  const [trains, setTrains] = useState([]);
+  const [noDataMessage, setNoDataMessage] = useState("");
 
-  // Handler function for division change
   const handleDivisionChange = (e) => {
     const division = e.target.value;
     setSelectedDivision(division);
     setSelectedCity(""); // Reset city when division changes
-    setTrains([]); // Reset trains when division changes
-    setNoDataMessage(""); // Reset no data message
+    setTrains([]); // Clear trains when division changes
+    setNoDataMessage("");
+
+    // Reset city options based on selected division
+    if (division === "NFR") {
+      setAvailableCities(["Guwahati"]);
+    } else if (division === "ER") {
+      setAvailableCities(["Kolkata"]);
+    } else {
+      setAvailableCities([]);
+    }
   };
 
-  // Handler function for city change
   const handleCityChange = (e) => {
     const city = e.target.value;
     setSelectedCity(city);
-
-    // Fetch trains when city is selected
     if (selectedDivision && city) {
       fetchTrains(selectedDivision, city);
     }
   };
 
-  // Function to fetch trains based on division and city
   const fetchTrains = async (division, city) => {
     try {
       const response = await fetch(`http://localhost:5000/api/division/city?division=${division}&city=${city}`);
-      
-      // Check if the response is OK
       if (!response.ok) {
         throw new Error(`Error: ${response.statusText}`);
       }
-
       const data = await response.json();
 
-      if (data.trains) {
-        if (data.trains.length > 0) {
-          setTrains(data.trains); // Set train data
-          setNoDataMessage(""); // Reset no data message
-        } else {
-          setTrains([]); // Reset trains if no trains found
-          setNoDataMessage("The service hasn't started in the respective location."); // Set no data message
-        }
+      if (data.trains && data.trains.length > 0) {
+        setTrains(data.trains);
+        setNoDataMessage("");
       } else {
-        setTrains([]); // Reset if no trains found
-        setNoDataMessage("The service hasn't started in the respective location."); // Set no data message
+        setTrains([]);
+        setNoDataMessage("The service hasn't started in the respective location.");
       }
     } catch (error) {
       console.error("Error fetching trains:", error);
-      setTrains([]); // Reset trains if there's an error
-      setNoDataMessage("The service hasn't started in the respective location."); // Set no data message
+      setTrains([]);
+      setNoDataMessage("The service hasn't started in the respective location.");
     }
   };
+
+  const [availableCities, setAvailableCities] = useState([]); // State for available cities based on division
 
   return (
     <div className="flex flex-col min-h-screen">
       <div className="flex-grow p-4">
         <h2 className="text-2xl font-bold mb-4">Welcome to the Dashboard!</h2>
-
+        
         {/* Notice box */}
         <div className="bg-yellow-200 p-4 rounded-md shadow-md mt-4">
           No emergency brakes are applied on the train.
@@ -77,25 +75,21 @@ const Dashboard = () => {
           >
             <option value="">Select Division</option>
             <option value="NFR">NFR</option>
-            <option value="ER">ER</option> {/* New Division */}
-            {/* Add more divisions as needed */}
+            <option value="ER">ER</option>
           </select>
 
           <select
             className="border border-gray-300 rounded-md px-2 py-1"
             value={selectedCity}
             onChange={handleCityChange}
-            disabled={!selectedDivision} // Enable only if division is selected
+            disabled={!selectedDivision}
           >
             <option value="">Select City</option>
-            <option value="Guwahati">Guwahati</option>
-            {selectedDivision === "ER" && ( // Cities based on selected division
-              <>
-                <option value="Kolkata">Kolkata</option> {/* New City */}
-                {/* Add more cities for Eastern Railway if needed */}
-              </>
-            )}
-            {/* Add more cities based on other divisions if needed */}
+            {availableCities.map((city) => (
+              <option key={city} value={city}>
+                {city}
+              </option>
+            ))}
           </select>
         </div>
 
