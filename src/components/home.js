@@ -12,8 +12,8 @@ const Home = () => {
       </div>
       <footer className="bg-gray-800 p-4 text-center text-gray-300 rounded-t-2xl">
         <p>&copy; 2024 Akarshan Ghosh</p>
-        <p>Phone: +123 456 7890</p>
-        <p>Email: akarshan.ghosh@example.com</p>
+        <p className="text-sm md:text-base">Phone: +91 .....</p>
+        <p className="text-sm md:text-base">Email: akarshanghosh123@gmail.com</p>
       </footer>
     </div>
   );
