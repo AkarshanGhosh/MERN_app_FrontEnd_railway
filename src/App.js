@@ -1,53 +1,55 @@
 import "./App.css"; // Importing global CSS styles
-import React, { useEffect } from 'react'; // Import React and useEffect hook
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom"; // Import routing components from React Router
-import { connectWebSocket } from './utils/websocket'; // Import the WebSocket function for real-time communication
-import Navbar from "./components/navbar"; // Import the original Navbar component
-import DashboardNavbar from "./components/DashboardNavbar"; // Import the DashboardNavbar component
-import Home from "./components/home"; // Import the Home component
-import SignUp from "./components/signup"; // Import the SignUp component
-import SignIn from "./components/signin"; // Import the SignIn component
-import Contact from "./components/Contact"; // Import the Contact component
-import Dashboard from "./components/Dashboard"; // Import the Dashboard component
-import Profile from "./components/Profile"; // Import the Profile component
-import Train from "./components/Train"; // Import the Train component
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { connectWebSocket } from './utils/websocket';
+import Navbar from "./components/navbar"; // Main Navbar
+import DashboardNavbar from "./components/DashboardNavbar"; // Dashboard Navbar
+import Home from "./components/home"; // Home Component
+import SignUp from "./components/signup"; // Sign Up Component
+import SignIn from "./components/signin"; // Sign In Component
+import Contact from "./components/Contact"; // Contact Component
+import Dashboard from "./components/Dashboard"; // Dashboard Component
+import Profile from "./components/Profile"; // Profile Component
+import Train from "./components/Train"; // Train Component
 
-// Define the main App component
 function App() {
   useEffect(() => {
-    connectWebSocket(); // Establish WebSocket connection when the component mounts
-  }, []); // Empty dependency array ensures this runs only once on mount
+    connectWebSocket();
+  }, []);
   
-  // Check if user is authenticated by checking for a token in local storage
-  const isAuthenticated = localStorage.getItem("token") !== null; // true if token exists
-  const location = useLocation(); // Get the current location to determine which navbar to display
+  const isAuthenticated = localStorage.getItem("token") !== null; // Check if user is authenticated
+  const location = useLocation();
+
+  console.log("Current location:", location.pathname); // Debugging line
 
   return (
     <>
-      {/* Conditionally render Navbar and DashboardNavbar based on current location */}
-      {location.pathname !== '/profile' && location.pathname !== '/dashboard' && location.pathname !== '/train' && <Navbar />}
+      {/* Hide Navbar on specific routes */}
+      {!(location.pathname === '/dashboard' || location.pathname === '/profile' || location.pathname.startsWith('/train')) && <Navbar />}
       {(location.pathname === '/dashboard' || location.pathname.startsWith('/train')) && <DashboardNavbar />}
       
-      <div className="container"> {/* Main container for the application */}
-        <Routes> {/* Define application routes */}
-          <Route exact path="/" element={<Home />} /> {/* Home route */}
-          <Route exact path="/signup" element={<SignUp />} /> {/* SignUp route */}
-          <Route exact path="/signin" element={<SignIn />} /> {/* SignIn route */}
-          <Route exact path="/contact" element={<Contact />} /> {/* Contact route */}
-          <Route exact path="/dashboard" element={isAuthenticated ? <Dashboard /> : <SignIn />} /> {/* Dashboard route, redirect to SignIn if not authenticated */}
-          <Route exact path="/profile" element={isAuthenticated ? <Profile /> : <SignIn />} /> {/* Profile route, redirect to SignIn if not authenticated */}
-          <Route exact path="/train/:trainNumber" element={isAuthenticated ? <Train /> : <SignIn />} /> {/* Train route, redirect to SignIn if not authenticated */}
+    
+
+      
+      <div className="container">
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/signup" element={<SignUp />} />
+          <Route exact path="/signin" element={<SignIn />} />
+          <Route exact path="/contact" element={<Contact />} />
+          <Route exact path="/dashboard" element={isAuthenticated ? <Dashboard /> : <SignIn />} />
+          <Route exact path="/profile" element={isAuthenticated ? <Profile /> : <SignIn />} />
+          <Route exact path="/train/:trainNumber" element={isAuthenticated ? <Train /> : <SignIn />} />
         </Routes>
       </div>
     </>
   );
 }
 
-// Wrap the App component with Router to enable routing
 export default function WrappedApp() {
   return (
-    <Router> {/* Provides routing context to the App */}
-      <App /> {/* Render the main App component */}
+    <Router>
+      <App />
     </Router>
   );
 }
