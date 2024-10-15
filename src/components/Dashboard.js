@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   const [selectedDivision, setSelectedDivision] = useState("");
@@ -60,7 +59,7 @@ const Dashboard = () => {
     <div className="flex flex-col min-h-screen">
       <div className="flex-grow p-4">
         <h2 className="text-2xl font-bold mb-4">Welcome to the Dashboard!</h2>
-        
+
         {/* Notice box */}
         <div className="bg-yellow-200 p-4 rounded-md shadow-md mt-4">
           No emergency brakes are applied on the train.
@@ -108,7 +107,7 @@ const Dashboard = () => {
         </div>
 
         {/* Data display box for trains */}
-        <div className="bg-gray-100 p-8 rounded-lg shadow-lg mt-8 w-full max-w-4xl mx-auto h-64">
+        <div className="bg-gray-100 p-4 rounded-lg shadow-lg mt-8 w-full max-w-4xl mx-auto" style={{ maxHeight: '400px', overflowY: 'auto' }}>
           <h3 className="text-xl font-semibold mb-4">Train Data</h3>
           {trains.length > 0 ? (
             trains.map((train) => (
@@ -120,13 +119,6 @@ const Dashboard = () => {
           ) : (
             <p className="text-gray-700">{noDataMessage || "Please select the division and city to display the data."}</p>
           )}
-        </div>
-
-        {/* Link to train details */}
-        <div className="mt-4">
-          <Link to="/train" className="text-blue-600 hover:underline">
-            Go to Train Details
-          </Link>
         </div>
       </div>
 
