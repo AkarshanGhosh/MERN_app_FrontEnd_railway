@@ -24,8 +24,8 @@ const Dashboard = () => {
       <footer className="bg-gray-800 p-4 text-center text-gray-300 relative">
         <div className="absolute -top-5 left-0 w-full h-8 bg-gray-800 rounded-t-full"></div>
         <p className="text-sm md:text-base">&copy; 2024 Akarshan Ghosh</p>
-        <p className="text-sm md:text-base">Phone: +91 .....</p>
-        <p className="text-sm md:text-base">Email: akarshanghosh123@gmail.com</p>
+        <p className="text-sm md:text-base">Phone: +91 .......</p>
+        <p className="text-sm md:text-base">Email: akarshanghosh28@gmail.com</p>
       </footer>
     </div>
   );
