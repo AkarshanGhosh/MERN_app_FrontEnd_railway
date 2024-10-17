@@ -15,9 +15,9 @@ const Dashboard = () => {
 
     // Reset city options based on selected division
     if (division === "NFR") {
-      setAvailableCities(["Guwahati"]);
+      setAvailableCities(["Guwahati"]); //Add citiess under NFR
     } else if (division === "ER") {
-      setAvailableCities(["Kolkata", "Agartala"]); // Added Agartala here
+      setAvailableCities(["Kolkata", "Agartala"]); // Added Cities under ER
     } else {
       setAvailableCities([]);
     }
