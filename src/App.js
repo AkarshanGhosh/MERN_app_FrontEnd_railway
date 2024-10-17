@@ -11,6 +11,7 @@ import Contact from "./components/Contact"; // Contact Component
 import Dashboard from "./components/Dashboard"; // Dashboard Component
 import Profile from "./components/Profile"; // Profile Component
 import Train from "./components/Train"; // Train Component
+import Coach from "./components/Coach"; // Coach Component (newly added)
 
 function App() {
   useEffect(() => {
@@ -24,12 +25,11 @@ function App() {
 
   return (
     <>
-      {/* Hide Navbar on specific routes */}
-      {!(location.pathname === '/dashboard' || location.pathname === '/profile' || location.pathname.startsWith('/train')) && <Navbar />}
-      {(location.pathname === '/dashboard' || location.pathname.startsWith('/train')) && <DashboardNavbar />}
+      {/* Hide Main Navbar on specific routes */}
+      {!(location.pathname === '/dashboard' || location.pathname === '/profile' || location.pathname.startsWith('/train') || location.pathname.startsWith('/coach')) && <Navbar />}
       
-    
-
+      {/* Show Dashboard Navbar on specific routes */}
+      {(location.pathname === '/dashboard' || location.pathname.startsWith('/train') || location.pathname.startsWith('/coach')) && <DashboardNavbar />}
       
       <div className="container">
         <Routes>
@@ -40,6 +40,7 @@ function App() {
           <Route exact path="/dashboard" element={isAuthenticated ? <Dashboard /> : <SignIn />} />
           <Route exact path="/profile" element={isAuthenticated ? <Profile /> : <SignIn />} />
           <Route exact path="/train/:trainNumber" element={isAuthenticated ? <Train /> : <SignIn />} />
+          <Route exact path="/coach/:coachId" element={isAuthenticated ? <Coach /> : <SignIn />} /> {/* New route for Coach */}
         </Routes>
       </div>
     </>

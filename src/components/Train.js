@@ -62,7 +62,7 @@ const Train = () => {
 
   // Function to handle coach click
   const handleCoachClick = (coach) => {
-    navigate(`/coach-details/${coach}`); // Navigate to the coach details page
+    navigate(`/coach/${coach}`); // Navigate to the coach details page using coach ID
   };
 
   return (
