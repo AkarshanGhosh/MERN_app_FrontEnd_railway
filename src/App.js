@@ -1,7 +1,7 @@
 import "./App.css"; // Importing global CSS styles
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
-import { connectWebSocket } from './utils/websocket';
+import { connectWebSocket, socket } from './utils/websocket'; // Import socket
 import Navbar from "./components/navbar"; // Main Navbar
 import DashboardNavbar from "./components/DashboardNavbar"; // Dashboard Navbar
 import Home from "./components/home"; // Home Component
@@ -16,6 +16,11 @@ import Coach from "./components/Coach"; // Coach Component (newly added)
 function App() {
   useEffect(() => {
     connectWebSocket();
+
+    // Cleanup function
+    return () => {
+      socket.close(); // Make sure to close the WebSocket when the component unmounts
+    };
   }, []);
   
   const isAuthenticated = localStorage.getItem("token") !== null; // Check if user is authenticated
