@@ -42,10 +42,21 @@ const Train = () => {
       document.body.classList.add('hide-navbar'); // Add class to hide the Navbar
     }
 
-    // Cleanup function to clear interval and remove class on component unmount
+    // Warning message before the user reloads the page
+    const handleBeforeUnload = (event) => {
+      const message = 'Reloading the site will remove all the data from display.'; // Warning message
+      event.preventDefault(); // Prevent default behavior
+      event.returnValue = message; // Set returnValue for modern browsers
+      return message; // Return message for older browsers
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload); // Add event listener
+
+    // Cleanup function to clear interval, remove class, and remove event listener
     return () => {
       document.body.classList.remove('hide-navbar'); // Remove class to show the Navbar
       clearInterval(intervalId); // Clear the interval to prevent memory leaks
+      window.removeEventListener('beforeunload', handleBeforeUnload); // Remove event listener
     };
   }, [location.pathname, selectedTrain]); // Dependencies: re-run effect when pathname or selectedTrain changes
 
