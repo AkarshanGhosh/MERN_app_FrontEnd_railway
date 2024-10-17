@@ -17,7 +17,7 @@ const Dashboard = () => {
     if (division === "NFR") {
       setAvailableCities(["Guwahati"]);
     } else if (division === "ER") {
-      setAvailableCities(["Kolkata"]);
+      setAvailableCities(["Kolkata", "Agartala"]); // Added Agartala here
     } else {
       setAvailableCities([]);
     }
