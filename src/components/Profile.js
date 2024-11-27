@@ -23,7 +23,7 @@ const Profile = () => {
         }
 
         // Make API call to fetch user data
-        const response = await axios.post('http://localhost:5000/api/auth/getuser', null, {
+        const response = await axios.post('${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/auth/getuser', null, {
           headers: {
             'auth-token': token, // Set auth token in headers for authentication
           },

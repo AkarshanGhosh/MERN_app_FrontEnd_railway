@@ -33,7 +33,7 @@ const Dashboard = () => {
 
   const fetchTrains = async (division, city) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/division/city?division=${division}&city=${city}`);
+      const response = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/division/city?division=${division}&city=${city}`);
       if (!response.ok) {
         throw new Error(`Error: ${response.statusText}`);
       }
