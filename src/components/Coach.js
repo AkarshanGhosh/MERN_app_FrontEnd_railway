@@ -15,7 +15,7 @@ const Coach = () => {
             if (selectedTrain && coachId) { // Check if both train number and coach ID are available
                 try {
                     // Fetch data from the API with the selected train number and coach ID
-                    const response = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/train/fetch?trainNumber=${selectedTrain}&coach=${coachId}`);
+                    const response = await fetch(`http://localhost:5000/api/train/fetch?trainNumber=${selectedTrain}&coach=${coachId}`);
                     const data = await response.json(); // Convert response to JSON
 
                     // Check if the data contains train information

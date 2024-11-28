@@ -21,7 +21,7 @@ const DashboardNavbar = () => {
     setErrorMessage('');
 
     try {
-      const response = await fetch('${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/division/check-train', {
+      const response = await fetch(`http://localhost:5000/api/division/check-train`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

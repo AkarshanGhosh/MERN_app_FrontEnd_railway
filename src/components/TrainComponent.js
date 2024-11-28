@@ -3,7 +3,7 @@ import { io } from 'socket.io-client';
 
 const TrainComponent = () => {
     const [message, setMessage] = useState('');
-    const socket = io('${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}'); // Connect to the Socket.IO server
+    const socket = io(`http://localhost:5000`); // Connect to the Socket.IO server
 
     useEffect(() => {
         // Listen for messages from the server

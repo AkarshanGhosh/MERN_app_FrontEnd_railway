@@ -15,7 +15,7 @@ const SignUp = () => {
     setError(null); // Reset error state on new submit
 
     try {
-      const response = await fetch("${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/auth/createuser", {
+      const response = await fetch(`http://localhost:5000/api/auth/createuser`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
