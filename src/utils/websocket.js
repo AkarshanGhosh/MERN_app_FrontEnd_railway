@@ -12,6 +12,7 @@ const connectWebSocket = () => {
 
   socket.onmessage = (event) => {
     console.log('Message received:', event.data);
+    // Handle incoming messages here
   };
 
   socket.onclose = () => {
