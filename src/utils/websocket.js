@@ -1,14 +1,17 @@
-// src/utils/websocket.js
-const socket = process.env.REACT_APP_SOCKET_URL || 'wss://mern-app-railway.vercel.app/ws';// Replace with your WebSocket URL
+const SOCKET_URL = process.env.REACT_APP_SOCKET_URL || 'wss://mern-app-railway.vercel.app/ws';
+
+let socket;
 
 const connectWebSocket = () => {
+  // Create a WebSocket instance
+  socket = new WebSocket(SOCKET_URL);
+
   socket.onopen = () => {
     console.log('WebSocket connection established');
   };
 
   socket.onmessage = (event) => {
     console.log('Message received:', event.data);
-    // Handle incoming messages here
   };
 
   socket.onclose = () => {
