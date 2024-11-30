@@ -1,5 +1,5 @@
 // src/utils/websocket.js
-const socket = new WebSocket('ws://localhost:5000/ws'); // Replace with your WebSocket URL
+const socket = process.env.REACT_APP_SOCKET_URL || 'wss://mern-app-railway.vercel.app/ws';// Replace with your WebSocket URL
 
 const connectWebSocket = () => {
   socket.onopen = () => {
