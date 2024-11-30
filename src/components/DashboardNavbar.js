@@ -21,7 +21,7 @@ const DashboardNavbar = () => {
     setErrorMessage('');
 
     try {
-      const response = await fetch(`http://localhost:5000/api/division/check-train`, {
+      const response = await fetch(`https://51.20.2.163/api/division/check-train`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

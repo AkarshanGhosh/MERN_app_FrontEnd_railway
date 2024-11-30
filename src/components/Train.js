@@ -14,7 +14,7 @@ const Train = () => {
     const fetchCoaches = () => {
       if (selectedTrain) { // Check if a train number is selected
         // Fetch coaches from the backend based on the selected train number
-        fetch(`http://localhost:5000/api/train/coaches?trainNumber=${selectedTrain}`)
+        fetch(`https://51.20.2.163/api/train/coaches?trainNumber=${selectedTrain}`)
           .then(response => response.json()) // Convert response to JSON
           .then(data => {
             if (data.coaches) {
