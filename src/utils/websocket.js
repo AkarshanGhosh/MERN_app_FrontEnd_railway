@@ -1,4 +1,4 @@
-const SOCKET_URL = process.env.REACT_APP_SOCKET_URL || 'wss://mern-app-railway.vercel.app/ws';
+const SOCKET_URL = process.env.REACT_APP_SOCKET_URL || 'wss://mern-app-railway-fxvh.vercel.app/ws';
 
 let socket;
 

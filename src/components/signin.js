@@ -36,7 +36,7 @@ const SignIn = () => {
     };
 
     try {
-      const response = await fetch(`https://mern-app-railway.vercel.app/api/auth/login`, {
+      const response = await fetch(`https://mern-app-railway-fxvh.vercel.app/api/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
