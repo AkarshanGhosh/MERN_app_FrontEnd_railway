@@ -1,5 +1,5 @@
 // src/utils/websocket.js
-const socket = new WebSocket('ws://51.20.2.163:5000/ws'); // Replace with your WebSocket URL
+const socket = new WebSocket('wss://51.20.2.163:5000/ws'); // Replace with your WebSocket URL
 
 const connectWebSocket = () => {
   socket.onopen = () => {
